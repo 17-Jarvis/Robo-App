@@ -1,52 +1,49 @@
-// import { View, Text, Button, StyleSheet } from 'react-native';
-// import { useNavigation } from '@react-navigation/native';
-// //import { useNavigation } from '@react-navigation/native';
-// import AppNavigation from './Navigation';
-
-
-// export default function HomeScreen() {
-//   const navigation = useNavigation();
-
-//   return (
-//     <View style={styles.container}>
-//       <Text style={styles.title}>Welcome to Robo World</Text>
-//       <Button title="Visual" onPress={() => navigation.navigate('NextScreen')} />
-//       <Button title="Move" onPress={() => navigation.navigate('Mapviewer')} />
-//     </View>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     alignItems: 'center',
-//     backgroundColor: '#f5f5f5',
-//   },
-//   title: {
-//     fontSize: 24,
-//     fontWeight: 'bold',
-//     marginBottom: 20,
-//   },
-// });
-
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import HomeScreen from './index';  // Adjust the path if necessary
-import MapViewer from './Mapviewer'; // Ensure the file is correctly named and imported
-import NextScreen from './NextScreen'; // If this is another screen, ensure it's correctly created
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Link } from 'expo-router';
 
-const Stack = createStackNavigator();
-
-export default function App() {
+const LandingScreen = () => {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Mapviewer" component={MapViewer} />
-        <Stack.Screen name="NextScreen" component={NextScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <View style={styles.container}>
+      <Text style={styles.title}>Robot Navigation App</Text>
+      <Link href="/(tabs)/slam" asChild>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Mapping</Text>
+        </TouchableOpacity>
+      </Link>
+      <Link href="/(tabs)/map" asChild>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>Navigation</Text>
+        </TouchableOpacity>
+      </Link>
+    </View>
   );
-}
+};
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f0f0f0',
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 30,
+  },
+  button: {
+    backgroundColor: '#2196F3',
+    paddingVertical: 15,
+    paddingHorizontal: 40,
+    borderRadius: 25,
+    elevation: 3,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+});
+
+export default LandingScreen;
